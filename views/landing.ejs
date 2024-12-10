@@ -1,0 +1,140 @@
+<!-- landing.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captured Moments</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fff;
+            color: #333;
+            font-family: 'Georgia', serif;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .site-title {
+            font-size: 2.5rem;
+            letter-spacing: 0.1rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            text-align: center;
+            color: #333;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 0.05rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #888;
+        }
+
+        /* Tagline Section */
+        .tagline {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .tagline-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            font-weight: 300;
+            color: #666;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 2rem 1rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <h1 class="site-title">Captured Moments</h1>
+        <nav class="nav">
+            <a href="/landing" class="nav-link">home</a>
+            <a href="/art" class="nav-link">art</a>
+            <a href="/about" class="nav-link">about</a>
+            <a href="/inquire" class="nav-link">inquire</a>
+            <a href="/login" class="nav-link">gallery</a>
+        </nav>
+    </header>
+
+    <!-- Tagline Section -->
+    <section class="tagline">
+        <p class="tagline-text">the art of noticing</p>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="gallery-grid">
+            <!-- Display all images in the gallery -->
+            <img src="/images/building.JPG" alt="Building" class="gallery-image">
+            <img src="/images/sister.jpg" alt="Sister" class="gallery-image">
+            <img src="/images/outside.JPG" alt="Outside" class="gallery-image">
+            <img src="/images/dave.JPG" alt="Dave" class="gallery-image">
+            <img src="/images/newport.jpg" alt="Newport Beach" class="gallery-image">
+            <img src="/images/dog.JPG" alt="Dog by the Lake" class="gallery-image">
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 Captured Moments. All rights reserved.</p>
+    </footer>
+</body>
+</html>

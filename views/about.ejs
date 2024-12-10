@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Link to your stylesheet -->
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+        nav.nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 0.05rem;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #888;
+        }
+        .team-section {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .team-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        .team-member {
+            text-align: center;
+            max-width: 200px;
+        }
+        .team-member img {
+            width: 100%;
+            max-width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .team-member h3 {
+            font-size: 1.2rem;
+            margin: 10px 0 5px;
+        }
+        .team-member p {
+            font-size: 1rem;
+            color: #555;
+        }
+        .about-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        .about-container img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .about-text {
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-top: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Meet Our Team</h1>
+        <nav class="nav">
+            <a href="/landing" class="nav-link">Home</a>
+            <a href="/art" class="nav-link">Art</a>
+            <a href="/about" class="nav-link">About</a>
+            <a href="/inquire" class="nav-link">Inquire</a>
+            <a href="/login" class="nav-link">Gallery</a>
+        </nav>
+    </header>
+    <main>
+        <!-- Team Section: Individual Photographers -->
+        <section class="team-section">
+            <h2 class="team-title">Our Photographers</h2>
+            <div class="team-members">
+                <div class="team-member">
+                    <img src="/images/miles-blake.jpg" alt="Miles Blake">
+                    <h3>Miles Blake</h3>
+                    <p>Landscape Photographer</p>
+                </div>
+                <div class="team-member">
+                    <img src="/images/alex.jpg" alt="Alex Gillen">
+                    <h3>Alex Gillen</h3>
+                    <p>Portrait Specialist</p>
+                </div>
+                <div class="team-member">
+                    <img src="/images/sadie-porter.jpg" alt="Sadie Porter">
+                    <h3>Sadie Porter</h3>
+                    <p>Creative Visionary</p>
+                </div>
+                <div class="team-member">
+                    <img src="/images/kenzie.jpg" alt="Kenzie Whitman">
+                    <h3>Kenzie Whitman</h3>
+                    <p>Documentary Photographer</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section class="about-container">
+            <h2>About Us</h2>
+            <p class="about-text">
+                Welcome to our photography team! Together, we bring passion, creativity, and expertise to every project. 
+                With diverse styles and specialties, we collaborate to capture stunning moments and create unforgettable memories.
+            </p>
+            <p class="about-text">
+                Whether you're celebrating a wedding, a milestone, or simply want to capture life's beauty, 
+                we’re here to make your vision come to life.
+            </p>
+            <img src="/images/group.jpg" alt="Our Team Group Photo">
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 PHOTOPROJECT. All rights reserved.</p>
+    </footer>
+</body>
+</html>

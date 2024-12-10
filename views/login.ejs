@@ -1,0 +1,64 @@
+<!-- login.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | Captured Moments</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Georgia', serif;
+            background: #f8f8f8;
+        }
+        .login-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .login-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .login-form label {
+            display: block;
+            margin: 1rem 0 0.5rem;
+            font-size: 1rem;
+        }
+        .login-form input {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .login-btn {
+            background-color: #333;
+            color: #fff;
+            padding: 0.7rem 0;
+            border: none;
+            width: 100%;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1 class="login-title">Log In</h1>
+        <form action="/login" method="POST" class="login-form">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit" class="login-btn">Log In</button>
+        </form>
+    </div>
+</body>
+</html>

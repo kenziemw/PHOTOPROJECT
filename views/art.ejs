@@ -1,0 +1,141 @@
+<!-- art.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art | Captured Moments</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fff;
+            color: #333;
+            font-family: 'Georgia', serif;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .site-title {
+            font-size: 2.5rem;
+            letter-spacing: 0.1rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            text-align: center;
+            color: #333;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 0.05rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #888;
+        }
+
+        /* Image Section */
+        .gallery-section {
+            margin: 40px auto;
+            max-width: 1200px;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .gallery-item {
+            flex: 1 1 calc(33.333% - 20px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item h3 {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <h1 class="site-title">ART</h1>
+            <nav class="nav">
+            <a href="/landing" class="nav-link">home</a>
+            <a href="/art" class="nav-link">art</a>
+            <a href="/about" class="nav-link">about</a>
+            <a href="/inquire" class="nav-link">inquire</a>
+            <a href="/login" class="nav-link">gallery</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="gallery-section">
+            <div class="gallery-item">
+                <img src="/images/night.jpg" alt="Art 1">
+                <h3>Artwork Title 1</h3>
+            </div>
+            <div class="gallery-item">
+                <img src="/images/art2.jpg" alt="Art 2">
+                <h3>Artwork Title 2</h3>
+            </div>
+            <div class="gallery-item">
+                <img src="/images/art3.jpg" alt="Art 3">
+                <h3>Artwork Title 3</h3>
+            </div>
+            <div class="gallery-item">
+                <img src="/images/art4.jpg" alt="Art 4">
+                <h3>Artwork Title 4</h3>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Captured Moments. All rights reserved.</p>
+    </footer>
+</body>
+</html>
