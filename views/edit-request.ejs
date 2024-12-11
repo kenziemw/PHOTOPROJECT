@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Session</title>
+</head>
+<body>
+    <h1>Edit Session</h1>
+    <form action="/requests/edit/<%= session.session_id %>" method="POST">
+        <label>Date Requested</label>
+        <input type="datetime-local" name="date_requested" value="<%= session.date_requested.toISOString().substring(0,16) %>" required>
+
+        <label>Notes</label>
+        <textarea name="notes"><%= session.notes %></textarea>
+
+        <button type="submit">Save Changes</button>
+    </form>
+    <a href="/requests">Back to Requests</a>
+</body>
+</html>

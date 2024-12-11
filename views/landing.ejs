@@ -1,11 +1,8 @@
-<!-- landing.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-
     <title>Captured Moments</title>
     <style>
         /* General Reset */
@@ -29,6 +26,7 @@
             flex-direction: column;
             align-items: center;
             margin-top: 2rem;
+            position: relative;
         }
 
         .site-title {
@@ -41,9 +39,24 @@
         }
 
         .nav {
+            margin-top: 1rem;
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            display: flex;
+            justify-content: center; /* keeps nav-left centered */
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-left {
             display: flex;
             gap: 2rem;
-            margin-top: 1rem;
+        }
+
+        .nav-right {
+            position: absolute;
+            right: 2rem;
         }
 
         .nav-link {
@@ -57,6 +70,10 @@
 
         .nav-link:hover {
             color: #888;
+        }
+
+        .login-button {
+            font-weight: bold;
         }
 
         /* Tagline Section */
@@ -97,6 +114,7 @@
         .gallery-image:hover {
             transform: scale(1.05);
         }
+        
         footer {
             text-align: center;
             padding: 20px;
@@ -110,10 +128,24 @@
     <header class="header">
         <h1 class="site-title">Captured Moments</h1>
         <nav class="nav">
-            <a href="/landing" class="nav-link">home</a>
-            <a href="/art" class="nav-link">art</a>
-            <a href="/about" class="nav-link">about</a>
-            <a href="/login" class="nav-link">inquire</a>
+            <div class="nav-left">
+                <a href="/landing" class="nav-link">home</a>
+                <a href="/art" class="nav-link">art</a>
+                <a href="/about" class="nav-link">about</a>
+                <!-- Inquire link passes a redirect parameter so that after login, user goes to /inquire -->
+                <a href="<%= isLoggedIn ? '/inquire' : '/login?redirect=/inquire' %>" class="nav-link">inquire</a>
+                <% if (isPhotographer) { %>
+                    <a href="/requests" class="nav-link">requests</a>
+                <% } %>
+            </div>
+            <!-- Login button goes directly to /login with no redirect param -->
+            <div class="nav-right">
+                <% if (isLoggedIn) { %>
+                    <a href="/logout" class="nav-link login-button">logout</a>
+                <% } else { %>
+                    <a href="/login" class="nav-link login-button">login</a>
+                <% } %>
+            </div>
             
         </nav>
     </header>
@@ -126,7 +158,6 @@
     <!-- Gallery Section -->
     <section class="gallery">
         <div class="gallery-grid">
-            <!-- Display all images in the gallery -->
             <img src="/images/building.JPG" alt="Building" class="gallery-image">
             <img src="/images/sister.jpg" alt="Sister" class="gallery-image">
             <img src="/images/outside.JPG" alt="Outside" class="gallery-image">

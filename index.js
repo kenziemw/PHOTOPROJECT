@@ -2,7 +2,7 @@ let express = require("express");
 let app = express();
 let path = require("path");
 const port = 5001;
-const session = require('express-session'); // Added for sessions
+const session = require('express-session');
 const knex = require("knex")({
     client: "pg",
     connection: {
@@ -11,7 +11,7 @@ const knex = require("knex")({
         password: process.env.RDS_DB_NAME || "admin!",
         database: process.env.RDS_PORT || "403photowebsite",
         port: process.env.RDS_PORT || 5432,
-        /* ssl: { // comment this out if you are running locally
+        /* ssl: {
             require: true,
             rejectUnauthorized: false
         } */
@@ -25,10 +25,10 @@ app.use(express.json());
 
 // Session middleware configuration
 app.use(session({
-    secret: 'yourSecretKeyHere', // Replace with a strong secret key in production
+    secret: 'yourSecretKeyHere', 
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // Set secure: true in production over HTTPS
+    cookie: { secure: false }
 }));
 
 // Set view engine for rendering ejs files
@@ -38,16 +38,27 @@ app.set("views", path.join(__dirname, "views"));
 // Require external routes
 const loginRoutes = require("./routes/login")(knex); 
 const registerRoutes = require("./routes/register")(knex); 
-const inquireRoutes = require("./routes/inquire")(knex); // Added for inquiry feature
+const inquireRoutes = require("./routes/inquire")(knex); 
+const requestsRoutes = require("./routes/requests")(knex); // New requests route
 
 // Use routes
 app.use(loginRoutes);
 app.use(registerRoutes);
-app.use(inquireRoutes); // Use the inquiry-specific routes
+app.use(inquireRoutes);
+app.use(requestsRoutes);
 
 // Landing Page
-app.get("/", (req, res) => {
-    res.render("landing");
+app.get("/", async (req, res) => {
+    let isPhotographer = false;
+    let isLoggedIn = false;
+    if (req.session && req.session.userId) {
+        isLoggedIn = true;
+        const photographerRecord = await knex('photographers').where({ user_id: req.session.userId }).first();
+        if (photographerRecord) {
+            isPhotographer = true;
+        }
+    }
+    res.render("landing", { isPhotographer, isLoggedIn });
 });
 
 // Photography Services Page
@@ -56,8 +67,29 @@ app.get("/services", (req, res) => {
 });
 
 // Landing page
-app.get("/landing", (req, res) => {
-    res.render("landing");
+app.get("/landing", async (req, res) => {
+    let isPhotographer = false;
+    let isLoggedIn = false;
+    if (req.session && req.session.userId) {
+        isLoggedIn = true;
+        const photographerRecord = await knex('photographers').where({ user_id: req.session.userId }).first();
+        if (photographerRecord) {
+            isPhotographer = true;
+        }
+    }
+    res.render("landing", { isPhotographer, isLoggedIn });
+});
+
+// Logout Route
+app.get("/logout", (req, res) => {
+    // Destroy the session
+    req.session.destroy((err) => {
+        if (err) {
+            console.error("Error destroying session:", err);
+        }
+        // Redirect back to landing page
+        res.redirect("/landing");
+    });
 });
 
 // Gallery Page
@@ -75,7 +107,6 @@ app.get("/about", (req, res) => {
     res.render("about");
 });
 
-// Middleware to require login
 function requireLogin(req, res, next) {
     if (!req.session || !req.session.userId) {
         return res.redirect('/login');
@@ -83,11 +114,7 @@ function requireLogin(req, res, next) {
     next();
 }
 
-// Inquire Page (only accessible if logged in)
-// Commenting this out since the route is now in inquire.js
-// app.get("/inquire", requireLogin, (req, res) => {
-//     res.render("inquire");
-// });
+// We have moved the inquire routes to inquire.js, so no need to define here again.
 
 // Dashboard (for logged-in users)
 app.get("/dashboard", requireLogin, (req, res) => {

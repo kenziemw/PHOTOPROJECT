@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requests</title>
+    <style>
+        /* basic styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+        }
+        th {
+            text-align: left;
+        }
+        .actions form {
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Session Requests</h1>
+    <a href="/requests/new">Add New Session</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Requester</th>
+                <th>Contact</th>
+                <th>Date Requested</th>
+                <th>Notes</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% sessions.forEach(session => { %>
+            <tr>
+                <td><%= session.first_name %> <%= session.last_name %></td>
+                <td>Email: <%= session.email %><br>Phone: <%= session.phone_number %></td>
+                <td><%= session.date_requested %></td>
+                <td><%= session.notes %></td>
+                <td class="actions">
+                    <a href="/requests/edit/<%= session.session_id %>">Edit</a>
+                    <form action="/requests/delete/<%= session.session_id %>" method="POST" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+    <a href="/landing">Back to Home</a>
+</body>
+</html>

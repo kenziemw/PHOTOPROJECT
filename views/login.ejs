@@ -37,7 +37,7 @@
             font-size: 1rem;
             margin-bottom: 1rem;
         }
-        .login-btn, .register-btn {
+        .login-btn {
             background-color: #333;
             color: #fff;
             padding: 0.7rem 0;
@@ -45,10 +45,6 @@
             width: 100%;
             font-size: 1rem;
             cursor: pointer;
-            margin-bottom: 1rem;
-        }
-        .register-btn {
-            background-color: #555;
         }
         .error-message {
             color: red;
@@ -59,10 +55,11 @@
 <body>
     <div class="login-container">
         <h1 class="login-title">Log In</h1>
-        <% if (typeof error !== 'undefined') { %>
+        <% if (error) { %>
             <p class="error-message"><%= error %></p>
         <% } %>
-        <form action="/login" method="POST" class="login-form">
+        <!-- If redirectUrl is present, add it as a query param to the form action -->
+        <form action="/login<%= redirectUrl ? '?redirect=' + encodeURIComponent(redirectUrl) : '' %>" method="POST" class="login-form">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required>
             <label for="password">Password</label>
@@ -70,7 +67,7 @@
             <button type="submit" class="login-btn">Log In</button>
         </form>
         <form action="/register" method="GET">
-            <button type="submit" class="register-btn">Register</button>
+            <button type="submit" class="login-btn" style="margin-top:10px;">Register</button>
         </form>
     </div>
 </body>
