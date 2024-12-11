@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Captured Moments</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Georgia', serif;
+            background: #f8f8f8;
+        }
+        .register-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .register-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .register-form label {
+            display: block;
+            margin: 1rem 0 0.5rem;
+            font-size: 1rem;
+        }
+        .register-form input {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .register-btn {
+            background-color: #333;
+            color: #fff;
+            padding: 0.7rem 0;
+            border: none;
+            width: 100%;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 1rem;
+        }
+        .success-message {
+            color: green;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h1 class="register-title">Register</h1>
+        <% if (typeof error !== 'undefined') { %>
+            <p class="error-message"><%= error %></p>
+        <% } %>
+        <% if (typeof success !== 'undefined') { %>
+            <p class="success-message"><%= success %></p>
+        <% } %>
+        <form action="/register" method="POST" class="register-form">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" required>
+            
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" required>
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="phone_number">Phone Number</label>
+            <input type="text" id="phone_number" name="phone_number">
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit" class="register-btn">Register</button>
+        </form>
+    </div>
+</body>
+</html>

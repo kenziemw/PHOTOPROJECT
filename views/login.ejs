@@ -1,4 +1,3 @@
-<!-- login.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +37,7 @@
             font-size: 1rem;
             margin-bottom: 1rem;
         }
-        .login-btn {
+        .login-btn, .register-btn {
             background-color: #333;
             color: #fff;
             padding: 0.7rem 0;
@@ -46,18 +45,32 @@
             width: 100%;
             font-size: 1rem;
             cursor: pointer;
+            margin-bottom: 1rem;
+        }
+        .register-btn {
+            background-color: #555;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
 <body>
     <div class="login-container">
         <h1 class="login-title">Log In</h1>
+        <% if (typeof error !== 'undefined') { %>
+            <p class="error-message"><%= error %></p>
+        <% } %>
         <form action="/login" method="POST" class="login-form">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
             <button type="submit" class="login-btn">Log In</button>
+        </form>
+        <form action="/register" method="GET">
+            <button type="submit" class="register-btn">Register</button>
         </form>
     </div>
 </body>

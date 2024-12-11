@@ -1,19 +1,20 @@
 let express = require("express");
 let app = express();
 let path = require("path");
-const port = process.env.PORT || 3000;
+const port = 5001;
+const session = require('express-session'); // Added for sessions
 const knex = require("knex")({
     client: "pg",
     connection: {
         host: process.env.RDS_HOSTNAME || "localhost",
         user: process.env.RDS_USERNAME || "postgres",
-        password: process.env.RDS_DB_NAME || "Mmw100701!",
-        database: process.env.RDS_PORT || "PHOTOPROJECT",
-        port: process.env.RDS_PORT || 5433, 
-        // ssl: { // comment this out if you are running locally
-        //     require: true,
-        //     rejectUnauthorized: false
-        // } 
+        password: process.env.RDS_DB_NAME || "admin!",
+        database: process.env.RDS_PORT || "403photowebsite",
+        port: process.env.RDS_PORT || 5432,
+        /* ssl: { // comment this out if you are running locally
+            require: true,
+            rejectUnauthorized: false
+        } */
     }
 });
 
@@ -22,36 +23,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Session middleware configuration
+app.use(session({
+    secret: 'yourSecretKeyHere', // Replace with a strong secret key in production
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Set secure: true in production over HTTPS
+}));
+
 // Set view engine for rendering ejs files
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Routes
+// Require external routes
+const loginRoutes = require("./routes/login")(knex); 
+const registerRoutes = require("./routes/register")(knex); 
+const inquireRoutes = require("./routes/inquire")(knex); // Added for inquiry feature
+
+// Use routes
+app.use(loginRoutes);
+app.use(registerRoutes);
+app.use(inquireRoutes); // Use the inquiry-specific routes
 
 // Landing Page
 app.get("/", (req, res) => {
     res.render("landing");
-});
-
-// Login Page
-app.get("/login", (req, res) => {
-    res.render("login");
-});
-
-// POST Login Route (example of handling form submission)
-app.post("/login", async (req, res) => {
-    const { username, password } = req.body;
-    try {
-        const user = await knex('users').where({ username, password }).first();
-        if (user) {
-            res.redirect("/dashboard");
-        } else {
-            res.status(401).send("Invalid login credentials.");
-        }
-    } catch (error) {
-        console.error("Error logging in:", error);
-        res.status(500).send("An error occurred while logging in.");
-    }
 });
 
 // Photography Services Page
@@ -59,30 +55,42 @@ app.get("/services", (req, res) => {
     res.render("services");
 });
 
-// landing page
+// Landing page
 app.get("/landing", (req, res) => {
     res.render("landing");
 });
+
 // Gallery Page
 app.get("/gallery", (req, res) => {
     res.render("gallery");
 });
-// Gallery Page
+
+// Art Page
 app.get("/art", (req, res) => {
     res.render("art");
 });
+
 // About Page
 app.get("/about", (req, res) => {
     res.render("about");
 });
 
-// Inquire Page
-app.get("/inquire", (req, res) => {
-    res.render("inquire");
-});
+// Middleware to require login
+function requireLogin(req, res, next) {
+    if (!req.session || !req.session.userId) {
+        return res.redirect('/login');
+    }
+    next();
+}
+
+// Inquire Page (only accessible if logged in)
+// Commenting this out since the route is now in inquire.js
+// app.get("/inquire", requireLogin, (req, res) => {
+//     res.render("inquire");
+// });
 
 // Dashboard (for logged-in users)
-app.get("/dashboard", (req, res) => {
+app.get("/dashboard", requireLogin, (req, res) => {
     res.render("dashboard");
 });
 
@@ -90,7 +98,6 @@ app.get("/dashboard", (req, res) => {
 app.use((req, res, next) => {
     res.status(404).send('<h1>404 - Page Not Found</h1><p>The page you are looking for does not exist.</p>');
 });
-
 
 // Server listening on port
 app.listen(port, () => {

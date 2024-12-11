@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .thank-you-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .summary {
+            max-width: 600px;
+            width: 100%;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .summary p {
+            margin-bottom: 10px;
+        }
+        .summary .back-button {
+            margin-top: 20px;
+            display: inline-block;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .summary .back-button:hover {
+            background-color: #555;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <h2>Thank You!</h2>
+        <div class="summary">
+            <p><strong>Photographer:</strong> <%= photographerName %></p>
+            <p><strong>Date Requested:</strong> <%= dateRequested %></p>
+            <p><strong>Notes:</strong> <%= notes %></p>
+            <a href="/landing" class="back-button">Back to Home</a>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 PHOTOPROJECT. All rights reserved.</p>
+    </footer>
+</body>
+</html>
