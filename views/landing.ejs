@@ -173,6 +173,25 @@
             background-color: #333;
             color: #fff;
         }
+
+       /* New nav-button styling */
+       .nav-button {
+            background-color: #ddd;
+            color: #333;
+            padding: 6px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 300;
+            display: inline-block; /* ensures it's treated like a button */
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background-color: #bbb;
+        }
+
     </style>
 </head>
 <body>
@@ -193,9 +212,10 @@
             <!-- Login button goes directly to /login with no redirect param -->
             <div class="nav-right">
                 <% if (isLoggedIn) { %>
-                    <a href="/logout" class="nav-link login-button">logout</a>
+                    <!-- Apply both nav-link and nav-button classes -->
+                    <a href="/logout" class="nav-link nav-button login-button">logout</a>
                 <% } else { %>
-                    <a href="/login" class="nav-link login-button">login</a>
+                    <a href="/login" class="nav-link nav-button login-button">login</a>
                 <% } %>
             </div>
             
