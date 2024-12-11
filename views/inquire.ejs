@@ -69,7 +69,8 @@
             font-weight: 400;
         }
         .inquire-container input,
-        .inquire-container textarea {
+        .inquire-container textarea,
+        .inquire-container select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
@@ -111,19 +112,26 @@
             <a href="/about" class="nav-link">about</a>
             <a href="/inquire" class="nav-link">inquire</a>
             <a href="/login" class="nav-link">gallery</a>
+        </nav>
     </header>
     <main>
         <div class="inquire-container">
             <h2>We’d Love to Hear from You!</h2>
             <form action="/submit-inquiry" method="POST">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                <!-- Since user is logged in, we get user_id from session (not shown to user) -->
                 
-                <label for="email">Your Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <label for="photographer_id">Choose a Photographer</label>
+                <select id="photographer_id" name="photographer_id" required>
+                    <% photographers.forEach(photographer => { %>
+                        <option value="<%= photographer.photographer_id %>"><%= photographer.name %></option>
+                    <% }) %>
+                </select>
+
+                <label for="date_requested">Preferred Date/Time</label>
+                <input type="datetime-local" id="date_requested" name="date_requested" required>
                 
-                <label for="message">Your Message</label>
-                <textarea id="message" name="message" placeholder="How can we help you?" required></textarea>
+                <label for="notes">Notes</label>
+                <textarea id="notes" name="notes" placeholder="How can we help you?" required></textarea>
                 
                 <button type="submit">Submit</button>
             </form>

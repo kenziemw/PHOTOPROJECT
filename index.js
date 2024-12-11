@@ -38,10 +38,12 @@ app.set("views", path.join(__dirname, "views"));
 // Require external routes
 const loginRoutes = require("./routes/login")(knex); 
 const registerRoutes = require("./routes/register")(knex); 
+const inquireRoutes = require("./routes/inquire")(knex); // Added for inquiry feature
 
 // Use routes
 app.use(loginRoutes);
 app.use(registerRoutes);
+app.use(inquireRoutes); // Use the inquiry-specific routes
 
 // Landing Page
 app.get("/", (req, res) => {
@@ -82,9 +84,10 @@ function requireLogin(req, res, next) {
 }
 
 // Inquire Page (only accessible if logged in)
-app.get("/inquire", requireLogin, (req, res) => {
-    res.render("inquire");
-});
+// Commenting this out since the route is now in inquire.js
+// app.get("/inquire", requireLogin, (req, res) => {
+//     res.render("inquire");
+// });
 
 // Dashboard (for logged-in users)
 app.get("/dashboard", requireLogin, (req, res) => {
