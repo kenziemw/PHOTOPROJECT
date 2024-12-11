@@ -98,13 +98,31 @@ app.get("/gallery", (req, res) => {
 });
 
 // Art Page
-app.get("/art", (req, res) => {
-    res.render("art");
+app.get("/art", async (req, res) => {
+    let isPhotographer = false;
+    let isLoggedIn = false;
+    if (req.session && req.session.userId) {
+        isLoggedIn = true;
+        const photographerRecord = await knex('photographers').where({ user_id: req.session.userId }).first();
+        if (photographerRecord) {
+            isPhotographer = true;
+        }
+    }
+    res.render("art", { isPhotographer, isLoggedIn });
 });
 
 // About Page
-app.get("/about", (req, res) => {
-    res.render("about");
+app.get("/about", async (req, res) => {
+    let isPhotographer = false;
+    let isLoggedIn = false;
+    if (req.session && req.session.userId) {
+        isLoggedIn = true;
+        const photographerRecord = await knex('photographers').where({ user_id: req.session.userId }).first();
+        if (photographerRecord) {
+            isPhotographer = true;
+        }
+    }
+    res.render("about", { isPhotographer, isLoggedIn });
 });
 
 function requireLogin(req, res, next) {

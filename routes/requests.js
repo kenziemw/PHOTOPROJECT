@@ -26,10 +26,26 @@ module.exports = (knex) => {
         next();
     }
 
+    // Helper function to set isLoggedIn and isPhotographer
+    async function setUserVars(req) {
+        let isPhotographer = false;
+        let isLoggedIn = false;
+        if (req.session && req.session.userId) {
+            isLoggedIn = true;
+            const photographerRecord = await knex('photographers').where({ user_id: req.session.userId }).first();
+            if (photographerRecord) {
+                isPhotographer = true;
+            }
+        }
+        return { isPhotographer, isLoggedIn };
+    }
+
     // GET /requests - list all sessions for this photographer
     router.get("/requests", requireLogin, requirePhotographer, async (req, res) => {
         try {
+            const { isPhotographer, isLoggedIn } = await setUserVars(req);
             const photographer_id = req.photographer.photographer_id;
+
             // Join sessions with users to get requester info
             const sessions = await knex('sessions')
                 .join('users', 'sessions.user_id', 'users.user_id')
@@ -44,7 +60,7 @@ module.exports = (knex) => {
                 )
                 .where('sessions.photographer_id', photographer_id);
 
-            res.render("requests", { sessions });
+            res.render("requests", { sessions, isPhotographer, isLoggedIn });
         } catch (error) {
             console.error("Error fetching sessions:", error);
             res.status(500).send("An error occurred while retrieving session requests.");
@@ -53,7 +69,8 @@ module.exports = (knex) => {
 
     // GET /requests/new - form to add a new session
     router.get("/requests/new", requireLogin, requirePhotographer, async (req, res) => {
-        res.render("new-request");
+        const { isPhotographer, isLoggedIn } = await setUserVars(req);
+        res.render("new-request", { isPhotographer, isLoggedIn });
     });
 
     // POST /requests/new - create a new session
@@ -85,7 +102,9 @@ module.exports = (knex) => {
             if (!session) {
                 return res.status(404).send("Session not found or not associated with you.");
             }
-            res.render("edit-request", { session });
+
+            const { isPhotographer, isLoggedIn } = await setUserVars(req);
+            res.render("edit-request", { session, isPhotographer, isLoggedIn });
         } catch (error) {
             console.error("Error fetching session:", error);
             res.status(500).send("An error occurred while retrieving the session.");

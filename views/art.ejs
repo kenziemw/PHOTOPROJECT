@@ -31,6 +31,9 @@
         }
 
         /* Header */
+        header {
+            position: relative; /* Needed for nav-right positioning */
+        }
         .header {
             display: flex;
             flex-direction: column;
@@ -48,9 +51,24 @@
         }
 
         .nav {
+            margin-top: 1rem;
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-left {
             display: flex;
             gap: 2rem;
-            margin-top: 1rem;
+        }
+
+        .nav-right {
+            position: absolute;
+            right: 2rem;
         }
 
         .nav-link {
@@ -64,6 +82,10 @@
 
         .nav-link:hover {
             color: #888;
+        }
+
+        .login-button {
+            font-weight: bold;
         }
 
         /* Image Section */
@@ -116,13 +138,22 @@
         <div class="header">
             <h1 class="site-title">ART</h1>
             <nav class="nav">
-                <a href="/landing" class="nav-link">home</a>
-                <a href="/art" class="nav-link">art</a>
-                <a href="/about" class="nav-link">about</a>
-                <a href="/login" class="nav-link">inquire</a>
-                <% if (isPhotographer) { %>
-                    <a href="/requests" class="nav-link">requests</a>
-                <% } %>
+                <div class="nav-left">
+                    <a href="/landing" class="nav-link">home</a>
+                    <a href="/art" class="nav-link">art</a>
+                    <a href="/about" class="nav-link">about</a>
+                    <a href="<%= isLoggedIn ? '/inquire' : '/login?redirect=/inquire' %>" class="nav-link">inquire</a>
+                    <% if (isPhotographer) { %>
+                        <a href="/requests" class="nav-link">requests</a>
+                    <% } %>
+                </div>
+                <div class="nav-right">
+                    <% if (isLoggedIn) { %>
+                        <a href="/logout" class="nav-link login-button">logout</a>
+                    <% } else { %>
+                        <a href="/login" class="nav-link login-button">login</a>
+                    <% } %>
+                </div>
             </nav>
         </div>
     </header>

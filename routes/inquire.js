@@ -13,9 +13,20 @@ module.exports = (knex) => {
 
     // GET Inquire Page (only accessible if logged in)
     router.get("/inquire", requireLogin, async (req, res) => {
+        let isPhotographer = false;
+        let isLoggedIn = false;
+        if (req.session && req.session.userId) {
+            isLoggedIn = true;
+            const photographerRecord = await knex('photographers').where({ user_id: req.session.userId }).first();
+            if (photographerRecord) {
+                isPhotographer = true;
+            }
+        }
+
         try {
             const photographers = await knex('photographers').select('*');
-            res.render("inquire", { photographers });
+            // Pass isPhotographer and isLoggedIn to the template
+            res.render("inquire", { photographers, isPhotographer, isLoggedIn });
         } catch (error) {
             console.error("Error loading photographers:", error);
             res.status(500).send("An error occurred loading the inquiry form.");
@@ -51,6 +62,7 @@ module.exports = (knex) => {
     // GET Thank You Page
     router.get("/thank-you", (req, res) => {
         const { photographerName, dateRequested, notes } = req.query;
+        // If you need isPhotographer/isLoggedIn here as well, you must define them too.
         res.render("thank-you", { photographerName, dateRequested, notes });
     });
 

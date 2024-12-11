@@ -215,9 +215,9 @@
             moments with stunning visuals and a personalized touch.
         </p>
         <!-- Inquire Section -->
-    <section class="inquire-section">
-        <a href="/login" class="inquire-button">Inquire Now</a>
-    </section>
+        <section class="inquire-section">
+            <a href="<%= isLoggedIn ? '/inquire' : '/login?redirect=/inquire' %>" class="inquire-button">Inquire Now</a>
+        </section>        
     </section>
     
  <!-- Tagline Section -->
