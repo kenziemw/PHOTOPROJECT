@@ -5,11 +5,15 @@ const port = 5001;
 const knex = require("knex")({
     client: "pg",
     connection: {
-        host: "localhost",
-        user: "postgres",
-        password: "Mmw100701!",
-        database: "PHOTOPROJECT",
-        port: 5433
+        host: process.env.RDS_HOSTNAME || "localhost",
+        user: process.env.RDS_USERNAME || "postgres",
+        password: process.env.RDS_DB_NAME || "Mmw100701!",
+        database: process.env.RDS_PORT || "PHOTOPROJECT",
+        port: process.env.RDS_PORT || 5433, 
+        ssl: { // comment this out if you are running locally
+            require: true,
+            rejectUnauthorized: false
+        } 
     }
 });
 
