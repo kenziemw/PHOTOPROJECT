@@ -18,6 +18,13 @@
             font-family: 'Georgia', serif;
             font-size: 16px;
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
         }
 
         /* Header */
@@ -27,6 +34,7 @@
             align-items: center;
             margin-top: 2rem;
             position: relative;
+            padding: 20px 0;
         }
 
         .site-title {
@@ -89,6 +97,27 @@
             color: #666;
         }
 
+        /* Services Section */
+        .services {
+            padding: 2rem 1rem;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .services h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .services p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
         /* Gallery Section */
         .gallery {
             padding: 2rem 1rem;
@@ -114,7 +143,30 @@
         .gallery-image:hover {
             transform: scale(1.05);
         }
-        
+
+        /* Inquire Button */
+        .inquire-section {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .inquire-button {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #fff;
+            background-color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .inquire-button:hover {
+            background-color: #555;
+        }
+
+        /* Footer */
         footer {
             text-align: center;
             padding: 20px;
@@ -150,22 +202,44 @@
         </nav>
     </header>
 
-    <!-- Tagline Section -->
-    <section class="tagline">
-        <p class="tagline-text">the art of noticing</p>
-    </section>
 
-    <!-- Gallery Section -->
-    <section class="gallery">
-        <div class="gallery-grid">
-            <img src="/images/building.JPG" alt="Building" class="gallery-image">
-            <img src="/images/sister.jpg" alt="Sister" class="gallery-image">
-            <img src="/images/outside.JPG" alt="Outside" class="gallery-image">
-            <img src="/images/dave.JPG" alt="Dave" class="gallery-image">
-            <img src="/images/newport.jpg" alt="Newport Beach" class="gallery-image">
-            <img src="/images/dog.JPG" alt="Dog by the Lake" class="gallery-image">
-        </div>
+    <!-- Services Section -->
+    <section class="services">
+        <h2>Our Services</h2>
+        <p>
+            At Captured Moments, we specialize in creating timeless memories through our photography. 
+            Our team offers a range of professional photography services, including portraits, events, 
+            family sessions, and creative projects. Whether it's capturing the joy of a wedding, the warmth 
+            of a family gathering, or the unique beauty of the world around us, our mission is to bring 
+            your vision to life with artistry and care. Let us help you preserve life’s most precious 
+            moments with stunning visuals and a personalized touch.
+        </p>
+        <!-- Inquire Section -->
+    <section class="inquire-section">
+        <a href="/login" class="inquire-button">Inquire Now</a>
     </section>
+    </section>
+    
+ <!-- Tagline Section -->
+ <section class="tagline">
+    <p class="tagline-text">The art of noticing</p>
+</section>
+    <!-- Gallery Section -->
+    <main>
+        <section class="gallery">
+            <div class="gallery-grid">
+                <!-- Display all images in the gallery -->
+                <img src="/images/building.JPG" alt="Building" class="gallery-image">
+                <img src="/images/sister.jpg" alt="Sister" class="gallery-image">
+                <img src="/images/outside.JPG" alt="Outside" class="gallery-image">
+                <img src="/images/dave.JPG" alt="Dave" class="gallery-image">
+                <img src="/images/newport.jpg" alt="Newport Beach" class="gallery-image">
+                <img src="/images/dog.JPG" alt="Dog by the Lake" class="gallery-image">
+            </div>
+        </section>
+    </main>
+
+
     <footer>
         <p>&copy; 2024 Captured Moments. All rights reserved.</p>
     </footer>
