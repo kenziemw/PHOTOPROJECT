@@ -1,7 +1,7 @@
 let express = require("express");
 let app = express();
 let path = require("path");
-const port = 5001;
+const port = process.env.PORT || 5001;
 const session = require('express-session');
 const knex = require("knex")({
     client: "pg",
@@ -11,10 +11,10 @@ const knex = require("knex")({
         password: process.env.RDS_DB_NAME || "admin!",
         database: process.env.RDS_PORT || "403photowebsite",
         port: process.env.RDS_PORT || 5432,
-        /* ssl: {
+        ssl: {
             require: true,
             rejectUnauthorized: false
-        } */
+        } 
     }
 });
 
