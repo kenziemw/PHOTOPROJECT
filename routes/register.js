@@ -19,13 +19,15 @@ module.exports = (knex) => {
             }
 
             // Insert the new user and return their ID
-            const [newUserId] = await knex('users').insert({
+            const newUserResult = await knex('users').insert({
                 first_name,
                 last_name,
                 email,
                 phone_number: phone_number || null,
                 password
-            }).returning('user_id');
+              }).returning('user_id');
+              
+              const newUserId = newUserResult[0].user_id;  // or newUserResult[0]
 
             // Automatically log them in
             req.session.userId = newUserId;
